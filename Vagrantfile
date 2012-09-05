@@ -2,7 +2,7 @@ Vagrant::Config.run do |config|
  
     config.vm.box = "base"
 
-    config.vm.share_folder "brightleaf", "/home/vagrant/brightleaf", "./"
+    config.vm.share_folder "composable", "/home/vagrant/composable", "./"
     config.vm.forward_port 3000, 4567
     config.vm.forward_port 27017, 27017
     config.vm.provision :chef_solo do |chef| 

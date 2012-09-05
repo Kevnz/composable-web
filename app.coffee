@@ -5,7 +5,7 @@ app = module.exports = express()
 Y = require('yui').use('base', 'substitute')
 port = process.env.PORT or 3000
 
-
+db = require('mongojs').connect(process.env.MONGOLAB_URI, ['scores']);
 
 console.log('start app called')
 app.configure(->
@@ -40,8 +40,13 @@ app.get '/', (req, res, next )->
 
 app.get '/mixins', (req, res, next) ->
     res.render 'mixin'
+
 app.get '/models', (req, res, next) ->
     res.render 'mixin' 
+
+app.get '/scores', (req, res, next) ->
+
+
 
 #if(!module.parent)
 app.listen(port)
