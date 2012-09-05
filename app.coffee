@@ -45,6 +45,9 @@ app.get '/mixins', (req, res, next) ->
 app.get '/models', (req, res, next) ->
     res.render 'models' 
 
+app.get '/scores/:id', (req, res, next) ->
+    scores.find { id: req.body.id}, (err, docs) ->
+        res.send docs
 app.get '/scores', (req, res, next) ->
     scores.find (err, docs) ->
         res.send docs
@@ -53,7 +56,11 @@ app.post '/scores', (req, res, next) ->
     doc = { name, score, created, id }
     scores.save doc, (err) ->
         res.send { result : true, message : 'Score Saved'}
-
+app.post '/scores/:id', (req, res, next) ->
+    { name, score,created, id } = req.body 
+    doc = { name, score, created, id }
+    scores.save doc, (err) ->
+        res.send { result : true, message : 'Score Saved'}
 #if(!module.parent)
 app.listen(port)
 console.log('Express server listening on port %d', port)

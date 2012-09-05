@@ -1,4 +1,4 @@
-YUI().use('model', 'model-list', 'model-sync-rest', 'offline-sync',
+YUI().use('model', 'model-list', 'model-sync-rest', 'model-sync-local',
     'event',  'node', 'transition', 'handlebars', function(Y){
 
     var saveScore = function(e){
@@ -7,13 +7,13 @@ YUI().use('model', 'model-list', 'model-sync-rest', 'offline-sync',
         var name = Y.one('#name').get('value');
         var score = Y.one('#score').get('value');
         var submit = Y.one('#submit').get('checked'); 
-        var submethod = submit ? Y.ModelSync.REST : Y.ModelSync.Offline;
+        var submethod = submit ? Y.ModelSync.REST : Y.ModelSync.Local;
         Y.log(submethod)
-        Y.Score = Y.Base.create('user', Y.Model, [submit ? Y.ModelSync.REST : Y.ModelSync.Offline ], { 
+        Y.Score = Y.Base.create('score', Y.Model, [submit ? Y.ModelSync.REST : Y.ModelSync.Local ], { 
             root: '/scores'
         });
         var created = new Date();
-        var newScore = new Y.Score({id: created.getTime()});
+        var newScore = new Y.Score();
         newScore.setAttrs({name: name, score:score, created: created});
 
         newScore.save()
@@ -34,23 +34,24 @@ YUI().use('model', 'model-list', 'model-sync-rest', 'offline-sync',
     }
 
     var loadScores = function(online){
-        Y.ScoresList = Y.Base.create('scoresList', Y.ModelList, [online ? Y.ModelSync.REST : Y.ModelSync.Offline], {
+        Y.ModelSync.REST.EMULATE_HTTP = true
+        Y.ScoresList = Y.Base.create('scoresList', Y.ModelList, [online ? Y.ModelSync.REST : Y.ModelSync.Local], {
             model: Y.Score,
             comparator: function (model) {
                 return model.get('score');
             }
         });
         var scores = new Y.ScoresList();
-        scores.load();
-        var source   = Y.one('#scores-template').getHTML(),
-        template = Y.Handlebars.compile(source),
-        html;
-        console.log(scores.toJSON());
-        console.log(source);
-        html = template({scores : scores.toJSON()});
-        Y.one('#scoreboard').append(html);
+        scores.load(function(){
+            var source   = Y.one('#scores-template').getHTML(),
+                template = Y.Handlebars.compile(source),
+                html;
+            console.log(scores.toJSON());
+            console.log(source);
+            html = template({scores : scores.toJSON()});
+            Y.one('#scoreboard').append(html);
 
-
+        });
 
     }
     var init = function(){
