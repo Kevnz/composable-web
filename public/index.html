@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+     <head>
+          <meta charset="utf-8">
+          <title>title</title>
+          <meta name="description" content="" />
+          <meta name="author" content="Kevin Isom" />
+          <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;" />
+     </head>
+     <body> 
+          <header> </header>
+          <section>
+               <div id="wingding">
+               </div>
+          </section>
+          <footer> </footer>
+          <script src="/js/base.js"></script>
+          <script src="/js/widget.js"></script>
+          <script>
+               console.log('test')
+               
+               console.log(base)
+
+               var obj1 = {name:'obj1', doSomething : function(){ console.log('do');}, prop: 'my prop'};
+               var obj2 = {name:'obj2', doSomethingElse : function(){console.log('else')}, otherProp : 'my otherProp'};
+
+               var obj3 = base.mix(obj1, obj2);
+               console.log(obj3)
+
+
+
+               var wingding = new widget({src:'#wingding'});
+               console.log(wingding);
+          </script>
+     </body>
+</html>

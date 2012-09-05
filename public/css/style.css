@@ -1,0 +1,51 @@
+body{
+    color: #CCC;
+}
+body, 
+h2.title span, 
+ul.tabs li a.active{ 
+    background: #fdfdfd;
+    background: rgba(55,55,55,1);
+    background: #333;
+    background: transparent url("../images/backgrounds/noise-grey.jpg") repeat;
+    position: relative;
+    z-index: 1;
+} 
+body:after{  
+    content: "";
+    background: transparent url("../images/backgrounds/pattern_diagonal_medium.png") repeat;
+    position:absolute; 
+    z-index:99; 
+    left:0; 
+    bottom:0; 
+    right:0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+h1, h2, h3, h4, h5, h6 {
+    color: #FEFEFE;
+}
+
+
+body{ 
+    font: 15px/22px Cambria,Georgia,"New Century Schoolbook","Century Schoolbook L","Times New Roman",serif; 
+ 
+    }
+
+a, a:hover{ color: #ee7727; text-decoration: none;}
+a:hover{opacity: 0.8;}
+.module a:hover{opacity: 1;}
+
+
+h1, h2, h3, h4, h5, h6 {  
+    font-family: Cambria,Georgia,"New Century Schoolbook","Century Schoolbook L","Times New Roman",serif; 
+    font-weight: bold;  
+    font-weight: bold; 
+}   
+strong {
+    color: #FEFEFE;
+}
+a:visited {
+    color: #B67B53;
+}
