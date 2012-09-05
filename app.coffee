@@ -4,8 +4,9 @@ url = require('url')
 app = module.exports = express()
 Y = require('yui').use('base', 'substitute')
 port = process.env.PORT or 3000
-
-db = require('mongojs').connect(process.env.MONGOLAB_URI, ['scores']);
+mongoURL = process.env.MONGOLAB_URI or "teched"
+db = require('mongojs').connect(mongoURL, ['scores']);
+scores = db.collection('scores')
 
 console.log('start app called')
 app.configure(->
@@ -42,11 +43,17 @@ app.get '/mixins', (req, res, next) ->
     res.render 'mixin'
 
 app.get '/models', (req, res, next) ->
-    res.render 'mixin' 
+    res.render 'models' 
 
 app.get '/scores', (req, res, next) ->
-
-
+    scores.find (err, docs) ->
+        res.send docs
+app.post '/scores', (req, res, next) ->
+    { name, score } = req.body
+    created = new Date()
+    doc = { name, score, created }
+    scores.save doc, (err) ->
+        res.send { result : true, message : 'Score Saved'}
 
 #if(!module.parent)
 app.listen(port)

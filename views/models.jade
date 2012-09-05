@@ -1,7 +1,25 @@
-modelsextends ./layout
+extends ./layout
 block content
     .container
             .sixteen.columns
                     h1.remove-bottom(style='margin-top: 40px;') Mixins in Action
                     h5 Code
+            .sixteen.columns#play
+                button#generateScore(type='submit') Play
+            .eight.columns#details
+                form
+                    label Name
+                    input#name(type='text')
+                    label Score
+                    input#score(type='text', disabled='disabled')
+                    
+                    input#submit(type='checkbox')
+                    span Submit High Score?
+                    button#saveScore(type='submit') Save
+            .eight.columns#scoreboard
+                
+
+    script(src='/samples/models.js')
+
+
                     

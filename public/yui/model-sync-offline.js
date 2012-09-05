@@ -1,12 +1,14 @@
 YUI.add('offline-sync', function(Y) {
 
-    var OfflineSync = function(){
+    var OfflineSync = function(){}
 
+    OfflineSync.prototype = {
         sync: function (action, options, callback) {
             var data;
 
             switch (action) {
                 case 'create':
+                    Y.log('create');
                     data = this.toJSON();
  
                     data.id = Y.Lang.now();
@@ -16,6 +18,7 @@ YUI.add('offline-sync', function(Y) {
                     return;
 
                 case 'read': 
+                    Y.log('read');
                     data = localStorage.getItem(this.get('id'));
 
                     if (data) {
@@ -27,6 +30,7 @@ YUI.add('offline-sync', function(Y) {
                     return;
 
                 case 'update':
+                    Y.log('update');
                     data = this.toJSON();
  
                     localStorage.setItem(this.get('id'), Y.JSON.stringify(data));
@@ -39,6 +43,7 @@ YUI.add('offline-sync', function(Y) {
                     return;
 
                 default:
+                    Y.log('default');
                     callback('Invalid action');
             }
         }
