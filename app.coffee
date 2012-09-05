@@ -56,7 +56,12 @@ app.post '/scores', (req, res, next) ->
     doc = { name, score, created, id }
     scores.save doc, (err) ->
         res.send { result : true, message : 'Score Saved'}
-app.post '/scores/:id', (req, res, next) ->
+app.post '/scores/*', (req, res, next) ->
+    { name, score,created, id } = req.body 
+    doc = { name, score, created, id }
+    scores.save doc, (err) ->
+        res.send { result : true, message : 'Score Saved'}
+app.put '/scores/*', (req, res, next) ->
     { name, score,created, id } = req.body 
     doc = { name, score, created, id }
     scores.save doc, (err) ->

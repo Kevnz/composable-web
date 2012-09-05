@@ -24,6 +24,7 @@ LocalSync.prototype = {
             this.storage = Y.config.win.localStorage;
             store = this.storage.getItem(this.root);
         } catch (e) {
+            Y.log('Fail')
         }
         
         // Pull in existing data from localStorage, if possible
@@ -39,7 +40,7 @@ LocalSync.prototype = {
     sync: function (action, options, callback) {
         options || (options = {});
         var response;
-
+        console.log(this);
         switch (action) {
             case 'read':
                 if (this._isYUIModelList) {
@@ -49,6 +50,7 @@ LocalSync.prototype = {
                 }
                 break;
             case 'create':
+                Y.log(options);
                 response = this._create(options);
                 break;
             case 'update':
