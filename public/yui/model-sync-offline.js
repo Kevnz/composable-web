@@ -19,8 +19,9 @@ YUI.add('offline-sync', function(Y) {
 
                 case 'read': 
                     Y.log('read');
+                    Y.log(this.get('id'));
                     data = localStorage.getItem(this.get('id'));
-
+                    Y.log(this);
                     if (data) {
                         callback(null, data);
                     } else {

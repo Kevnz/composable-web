@@ -49,9 +49,8 @@ app.get '/scores', (req, res, next) ->
     scores.find (err, docs) ->
         res.send docs
 app.post '/scores', (req, res, next) ->
-    { name, score } = req.body
-    created = new Date()
-    doc = { name, score, created }
+    { name, score,created, id } = req.body 
+    doc = { name, score, created, id }
     scores.save doc, (err) ->
         res.send { result : true, message : 'Score Saved'}
 

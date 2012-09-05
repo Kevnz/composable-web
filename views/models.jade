@@ -17,9 +17,17 @@ block content
                     span Submit High Score?
                     button#saveScore(type='submit') Save
             .eight.columns#scoreboard
-                
+
 
     script(src='/samples/models.js')
+    script#scores-template(type='text/x-handlebars-template')
+        h4 High Scores: 
+
+        ol
+            | {{#scores}}
+            li {{name}} - {{score}}
+            | {{/scores}}
+
 
 
                     
